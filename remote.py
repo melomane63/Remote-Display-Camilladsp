@@ -32,12 +32,12 @@ KEY_BINDINGS = {
     'PLAYPAUSE': 'KEY_PLAYPAUSE',       # Play/pause music (LMS command)
     'PREVIOUSSONG': 'KEY_PREVIOUSSONG', # Play previous song (LMS command)
     'NEXTSONG': 'KEY_NEXTSONG',         # Play next song (LMS command)
-    'UP': 'KEY_UP',                     # Increase treble / loudness
-    'DOWN': 'KEY_DOWN',                 # Decrease treble / loudness
-    'LEFT': 'KEY_LEFT',                 # Decrease bass /loudness
-    'RIGHT': 'KEY_RIGHT',               # Increase bass / loudness
-    'POWER': 'KEY_POWER',               # Display brightness,toggle Auto power, Shutdown
-    'ENTER': 'KEY_ENTER',               # Toggle tone gain settings / Loudness display on long press
+    'UP': 'KEY_UP',                     # Increase treble / tilt / loudness
+    'DOWN': 'KEY_DOWN',                 # Decrease treble / tilt / loudness
+    'LEFT': 'KEY_LEFT',                 # Decrease bass / tilt / loudness
+    'RIGHT': 'KEY_RIGHT',               # Increase bass / tilt / loudness
+    'POWER': 'KEY_POWER',               # Toggle Auto power, Shutdown
+    'ENTER': 'KEY_ENTER',               # Toggle Tone/Tilt gain / Loudness on long press
     'BACK': 'KEY_BACK',                 # Switch to the next DSP configuration (prefixed with "_")
     'HOMEPAGE': 'KEY_HOMEPAGE',         # Switch to the next DSP configuration (prefixed with "|")
 }
@@ -73,7 +73,6 @@ is_waiting_for_sound  = False
 is_key_held           = False
 is_volume_key_held    = False
 last_displayed = None
-#blank_volume_when_mute = False
 
 # ====================== CONFIGURATION ======================
 
