@@ -98,9 +98,6 @@ while True:
         continue
     break
 
-# Assign knob
-#knob = evdev.InputDevice("/dev/input/event0")
-
 # Connect to CamillaDSP
 cdsp = CamillaClient("127.0.0.1", 1234)
 cdsp.connect()
@@ -409,9 +406,6 @@ def handle_enter_press(last_displayed):
     global tilt_gain_prev, tilt_gain_now
     global loudness_gain_prev, loudness_gain_now
 
- #   if last_displayed == "volume":
-  #      display_loudness_info()
-
     if last_displayed == "tone" and bass_params is not None and treble_params is not None:
         if bass_params['gain'] == treble_params['gain'] == 0:
             bass_params['gain'], treble_params['gain'] = bass_gain_prev, treble_gain_prev
@@ -464,8 +458,6 @@ async def adc_reader_loop():
                     tm.brightness(brightness)
                     last_brightness = brightness
                     print(f"ADC = {adc_value} -> Brightness = {brightness}")
-              #  else:
-               #     print(f"ADC = {adc_value}")
 
             except ValueError:
                 print(f"Non-numeric input received: {line}")
@@ -561,8 +553,6 @@ async def toggle_power():
             lgpio.gpio_write(h, POWER_GPIO, lgpio.LOW)  # Deactivate the relay
             tm.write(swap(tm.encode_string("PW OFF")))  # Display "POWER OFF"
 
-    #await asyncio.sleep(3)
-    #display_volume_info()  # if auto_power_enabled else tm.write(tm.encode_string("      "))
     last_displayed = "power"
 
 async def auto_poweroff():
@@ -585,8 +575,6 @@ async def auto_poweroff():
                     is_waiting_for_sound = True  # Wait for sound or Power button press to reactivate
 
             if silenceCounter >= HALT_DELAY*3600:
-#                await change_config(cdsp, CONFIG_DIR + '_*')
- #               await asyncio.sleep(2)
                 tm.write(swap(tm.encode_string(" HALT ")))
                 lgpio.gpio_write(h, POWER_GPIO, lgpio.LOW)
                 os.system("sudo shutdown -h now")
@@ -796,11 +784,6 @@ async def remote_events(device):
                         if device is None:
                                 await asyncio.sleep(1)  # avoid 100% CPU usage
 
-#        except OSError as e:
- #           print(f"❌ Critical error: {e}. Restarting the script...")
-  #          python = sys.executable
-   #         os.execv(python, [python] + sys.argv)  # Replaces the current process
-   
 
 def exit_gracefully(signal, frame):
     """Gracefully shuts down the service, including cleanup of GPIO resources."""
@@ -831,13 +814,6 @@ if lgpio.gpio_read(h, TV_GPIO) == 0:
     asyncio.run(change_config(cdsp, CONFIG_DIR + '|*'))
 else:
     asyncio.run(change_config(cdsp, CONFIG_DIR + '_*'))
-
-# Show startup animation and current volume info
-#for i in range(11):
- #   tm.write(swap(tm.encode_string(("      -".ljust(16))[i:i+6])))
-  #  time.sleep(0.3)
-#display_volume_info()
-
 
 async def main():
     asyncio.create_task(auto_poweroff())
