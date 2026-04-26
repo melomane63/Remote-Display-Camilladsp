@@ -729,7 +729,7 @@ async def remote_events(device):
 
                         elif key == KEY_BINDINGS['POWER']:
                             key_hold_counter += 1
-                            if key_hold_counter == 40:
+                            if key_hold_counter == 400:
                                 lgpio.gpio_write(h, POWER_GPIO, lgpio.LOW)
                                 #await change_config(cdsp, CONFIG_DIR + '_*')
                                 tm.write(swap(tm.encode_string(" HALT ")))
@@ -755,7 +755,7 @@ async def remote_events(device):
                         if key == KEY_BINDINGS['ENTER'] and key_hold_counter < 15:
                             handle_enter_press(last_displayed)
 
-                        elif key == KEY_BINDINGS['POWER'] and key_hold_counter < 10:
+                        elif key == KEY_BINDINGS['POWER'] and key_hold_counter > 10:
                             await toggle_power()
 
                         elif key == KEY_BINDINGS['PLAYPAUSE'] and key_hold_counter < 10:
